@@ -6,13 +6,10 @@ up:
 	docker-compose -f srcs/docker-compose.yml up --build -d
 down:
 	docker-compose -f srcs/docker-compose.yml down
-clean: down
-	docker stop $(docker ps -aq)
-	docker rm $(docker ps -aq)
-	docker rmi $(docker images -aq)
-	docker volume rm $(docker volume ls -q)
-	docker network rm $(sudo docker network ls -q)
+clean:
+	docker-compose -f srcs/docker-compose.yml down --rmi all -v
 	rm -rf ~/data/wp
 	rm -rf ~/data/db
+re: clean all
 
-.PHONY: all up down clean
+.PHONY: all up down clean re
