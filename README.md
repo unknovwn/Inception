@@ -1,7 +1,7 @@
 # Inception
 school 42 Inception project
 
-A small infrastructure composed of different services under specific rules using docker-compose.
+A small infrastructure composed of different services under specific rules using docker-compose.  
 Things that must be set up:
 - A Docker container that contains NGINX with TLSv1.2 or TLSv1.3
 - A Docker container that contains WordPress + php-fpm
