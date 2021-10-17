@@ -7,7 +7,7 @@ RUN apk update && \
 RUN openssl req -newkey rsa:4096 -x509 -days 9999 -nodes -out /etc/ssl/certs/nginx.crt -keyout /etc/ssl/private/nginx.key -subj "/C=RU/ST=Moscow/L=Moscow/O=42/CN=dima"
 
 COPY tools/entrypoint.sh .
-COPY tools/nginx.conf /etc/nginx/conf.d/default.conf
+COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 RUN chmod +x entrypoint.sh
 
