@@ -19,7 +19,7 @@ Default values have been already set.
 In WordPress database, there are two users, one of them being the administrator.  
 Admin user:  
 ```dmitris XXckIql1LbXCYReNkt```  
-Subscripber:  
+Subscriber:  
 ```paul98 HEeqFbTY^*Ojokfcaz*JwxdT```
 
 ### Diagram
