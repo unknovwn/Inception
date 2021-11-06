@@ -4,16 +4,22 @@ DATABASE_VOLUME_DIR  = ${VOLUMES_DIR}/db
 
 all: create-volume-dirs up
 
-up:
-	docker-compose -f srcs/docker-compose.yml up --build -d
-
 no-cache: create-volume-dirs
 	docker-compose -f srcs/docker-compose.yml build --no-cache
 	docker-compose -f srcs/docker-compose.yml create
 	docker-compose -f srcs/docker-compose.yml start
 
+up:
+	docker-compose -f srcs/docker-compose.yml up -d
+
 down:
 	docker-compose -f srcs/docker-compose.yml down
+
+start:
+	docker-compose -f srcs/docker-compose.yml start
+
+stop:
+	docker-compose -f srcs/docker-compose.yml stop
 
 create-volume-dirs:
 	mkdir -p ${WORDPRESS_VOLUME_DIR}

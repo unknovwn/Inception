@@ -3,5 +3,72 @@ services:
     build: "requirements/nginx"
     image: "nginx"
     container_name: "nginx"
+    networks:
+      - inception
     ports:
       - "443:443"
+    volumes:
+      - "wp:${WORDPRESS_VOLUME_DIR}"
+    environment:
+      - WORDPRESS_VOLUME_DIR
+      - SSL_CERTIFICATE
+      - SSL_CERTIFICATE_KEY
+    # restart: "always"
+  mariadb:
+    build: "requirements/mariadb"
+    image: "mariadb"
+    container_name: "mariadb"
+    networks:
+      - inception
+    ports:
+      - "3306:3306"
+    volumes:
+      - "db:${MYSQL_VOLUME_DIR}"
+    environment:
+      - MYSQL_VOLUME_DIR
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+    # restart: "always"
+  wordpress:
+    build: "requirements/wordpress"
+    image: "wordpress"
+    container_name: "wordpress"
+    networks:
+      - inception
+    ports:
+      - "9000:9000"
+    volumes:
+      - "wp:${WORDPRESS_VOLUME_DIR}"
+    environment:
+      - WORDPRESS_VOLUME_DIR
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - AUTH_KEY
+      - SECURE_AUTH_KEY
+      - LOGGED_IN_KEY
+      - NONCE_KEY
+      - AUTH_SALT
+      - SECURE_AUTH_SALT
+      - LOGGED_IN_SALT
+      - NONCE_SALT
+    # restart: "always"
+networks:
+  inception:
+    name: "inception"
+volumes:
+  wp:
+    name: "wp"
+    driver: "local"
+    driver_opts:
+      o: "bind"
+      type: "none"
+      device: "${HOME}/data/wp"
+  db:
+    name: "db"
+    driver: "local"
+    driver_opts:
+      o: "bind"
+      type: "none"
+      device: "${HOME}/data/db"

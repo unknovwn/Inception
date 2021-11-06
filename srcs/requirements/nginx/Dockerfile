@@ -2,12 +2,10 @@ FROM alpine:3.13.6
 
 RUN apk update && \
 	mkdir -p /run/nginx/ && \
-	apk add nginx libc6-compat openssl
-
-RUN openssl req -newkey rsa:4096 -x509 -days 9999 -nodes -out /etc/ssl/certs/nginx.crt -keyout /etc/ssl/private/nginx.key -subj "/C=RU/ST=Moscow/L=Moscow/O=42/CN=dima"
+	apk add nginx openssl gettext
 
 COPY tools/entrypoint.sh .
-COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY conf/nginx.conf .
 
 RUN chmod +x entrypoint.sh
 
